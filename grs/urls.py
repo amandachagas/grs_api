@@ -25,7 +25,8 @@ router.register(r'ratings', views.RatingViewSet)
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('signup', views.signup, name='signup'),
+    path('signup/', views.signup, name='signup'),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('routes/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+	<h2>Login</h2>
+	<form method="post">
+		{% csrf_token %}
+		 <!-- form.as_p }} -->
+
+		 <p>
+		 	<label for="id_username">Email:</label> 
+		 	<input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username">
+		 </p>
+
+		 <p>
+		 	<label for="id_password">Password:</label> 
+		 	<input type="password" name="password" autocomplete="current-password" required="" id="id_password">
+		 </p>
+
+		{% if form.errors %}
+		    {% for field in form %}
+		        {% for error in field.errors %}
+		            <div class="alert alert-danger">
+		                <strong style="color: red">{{ error|escape }}</strong>
+		            </div>
+		        {% endfor %}
+		    {% endfor %}
+		    {% for error in form.non_field_errors %}
+		        <div class="alert alert-danger">
+		            <strong style="color: red">{{ error|escape }}</strong>
+		        </div>
+		    {% endfor %}
+		{% endif %}
+
+		<button type="submit">Login</button>
+	</form>
+{% endblock %}

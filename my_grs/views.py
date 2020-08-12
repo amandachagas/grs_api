@@ -1,12 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from my_grs.models import Movie, Rating
 from rest_framework import viewsets
 from rest_framework import permissions
 from my_grs.serializers import UserSerializer, MovieSerializer, RatingSerializer
+from django.contrib.auth.forms import UserCreationForm
+
 
 # Create your views here.
-
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -37,7 +38,23 @@ class RatingViewSet(viewsets.ModelViewSet):
 
 
 def home(request):
-    return render(request, 'home.html')
+    counter = User.objects.count()
+    return render(request, 'home.html', {
+        'counter': counter
+        })
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            return redirect('home')
+    else:
+        form = UserCreationForm()
+    return render(request, 'signup.html', {
+        'form': form
+        })
 
 
 # @csrf_exempt

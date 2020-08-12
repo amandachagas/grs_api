@@ -3,6 +3,7 @@ from my_grs.models import Movie, Rating
 
 # Register your models here.
 
+
 class MovieAdmin(admin.ModelAdmin):
     pass
 

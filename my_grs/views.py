@@ -36,6 +36,10 @@ class RatingViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
+def home(request):
+    return render(request, 'home.html')
+
+
 # @csrf_exempt
 # def users_list(request):
 #     """

@@ -61,7 +61,9 @@ ROOT_URLCONF = 'grs.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'my_grs/templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

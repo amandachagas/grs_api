@@ -24,7 +24,8 @@ router.register(r'movies', views.MovieViewSet)
 router.register(r'ratings', views.RatingViewSet)
 
 urlpatterns = [
+    path('', views.home, name='home'),
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    path('routes/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

@@ -5,11 +5,27 @@ from my_grs.models import Movie, Rating
 
 
 class MovieAdmin(admin.ModelAdmin):
-    pass
+    
+    list_display = (
+        'movie_id',
+        'title',
+        'genres',
+        'tags',
+        'imdb_id',
+        'imdb_link',
+        'youtubeId',
+        'poster'
+
+    )
 
 
 class RatingAdmin(admin.ModelAdmin):
-    pass
+    
+    list_display = (
+        'user_id',
+        'movie_id',
+        'rating'
+    )
 
 
 admin.site.register(Movie, MovieAdmin)

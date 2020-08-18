@@ -4,4 +4,27 @@
 	<h2>Homepage</h2>
 	<p>Welcome to My GRS, {% if user.is_authenticated %}{{ user.username }}{% else %}visitor{% endif %}!</p>
 	<p>Total users registred: {{ counter }}</p>
+
+	<br>
+	<br>
+	{% if user.is_authenticated %}
+		{% if data %}
+			
+			{% for item in data %}
+			<ul>
+				<li>MovieId: {{ item.movie_id }}</li>
+				<li>Title: {{ item.title }}</li>
+				<li>Genres: {{ item.genres }}</li>
+				<li>Year: {{ item.year }}</li>
+				<li>ImdbId: {{ item.imdb_id }}</li>
+				<li>ImdbLink: {{ item.imdb_link }}</li>
+				<li>Poster: {{ item.poster }}</li>
+				<li>YoutubeId: {{ item.youtubeId }}</li>
+				<li>Tags: {{ item.tags }}</li>
+			</ul>
+			<br>
+			{% endfor %}
+			
+		{% endif %}
+	{% endif %}
 {% endblock %}

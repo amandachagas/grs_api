@@ -39,7 +39,28 @@ class RatingViewSet(viewsets.ModelViewSet):
 
 def home(request):
     counter = User.objects.count()
-    return render(request, 'home.html', {
+
+    if request.user.is_authenticated:
+
+        if request.method == 'GET':
+            movies = Movie.objects.all()[0:10]
+            serializer = MovieSerializer(movies, many=True)
+            # print(' > > > > > > > {} < < < < < < < <'.format(request.user.id))
+            return render(request, 'home.html', {
+                'data': serializer.data,
+                'counter': counter
+                })
+
+        elif request.method == 'POST':
+            rating = JSONParser().parse(request)
+            print('$ $ $ $ $ {} $ $ $ $ $'.format(rating))
+            return render(request, 'home.html', {
+                'data': rating,
+                'counter': counter
+                })
+
+    else:
+        return render(request, 'home.html', {
         'counter': counter
         })
 

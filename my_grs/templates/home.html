@@ -65,39 +65,62 @@
 				 	{% for item in data %}
 				 		{% if forloop.counter0 == 0 %}
 							<div class="carousel-item active" style="background-color: black;">
-								{% if item.poster == 'None' %}
-									<img class="d-block w-100" style="max-width:400px; margin-left: auto; margin-right: auto;" src="{% static 'img/cat_1.jpg' %}" alt="{{ forloop.counter0 }}">
-					    		{% else %}
-					    			<img class="d-block w-100" style="max-width:400px; margin-left: auto; margin-right: auto;" src="{{ item.poster }}" alt="{{ forloop.counter0 }}">
-					    		{% endif %}
+								
+				    			<div id="wrapper" style="width: 100%; overflow: hidden;">
+				    				<div style="width:50%; float:left; ">
+				    					{% if item.poster == 'None' %}
+											<img class="d-block w-100" style="max-width:400px; margin-left: auto; margin-right: auto;" src="{% static 'img/cat_1.jpg' %}" alt="{{ forloop.counter0 }}">
+							    		{% else %}
+				    						<img style="width: 70%; margin-left: auto; margin-right: auto;" src="{{ item.poster }}" alt="{{ forloop.counter0 }}">
+				    					{% endif %}
+				    				</div>
+				    				
+
+				    				<div class="card" style="float:left; width:50%;">
+										<div class="card-body">
+											<h5>{{ item.title }}</h5>
+											<p>Genres: {{ item.genres }}</p>
+											<p>Year: {{ item.year }}</p>
+											<p>ImdbLink: <a href="{{ item.imdb_link }}">Click here to see the sinopse.</a> {{ item.imdb_id }}</p>
+											<p>YoutubeId: <a href="https://www.youtube.com/watch?v={{ item.youtubeId }}">Trailer on Youtube.</a></p>
+											<p>Tags: {{ item.tags }}</p>
+										</div>
+									</div>
+				    			</div>
+
 					    		<div class="carousel-caption d-none d-md-block">
-						    		<h5>{{ item.title }}</h5>
-									<p>Genres: {{ item.genres }}</p>
-									<p>Year: {{ item.year }}</p>
-									<p>ImdbId: {{ item.imdb_id }}</p>
-									<p>ImdbLink: {{ item.imdb_link }}</p>
-									<p>Poster: {{ item.poster }}</p>
-									<p>YoutubeId: {{ item.youtubeId }}</p>
-									<p>Tags: {{ item.tags }}</p>
-						  		</div>
+					    			<p>My form</p>
+					    		</div>
+
 					    	</div>
 				    	{% else %}
 				    		<div class="carousel-item" style="background-color: black;">
-					    		{% if item.poster == 'None' %}
-									<img class="d-block w-100" style="max-width:400px; margin-left: auto; margin-right: auto;" src="{% static 'img/cat_1.jpg' %}" alt="{{ forloop.counter0 }}">
-					    		{% else %}
-					    			<img class="d-block w-100" style="max-width:400px; margin-left: auto; margin-right: auto;" src="{{ item.poster }}" alt="{{ forloop.counter0 }}">
-					    		{% endif %}
+					    		
+					    		<div id="wrapper" style="width: 100%; overflow: hidden;">
+				    				<div style="width:50%; float:left; ">
+				    					{% if item.poster == 'None' %}
+											<img class="d-block w-100" style="max-width:400px; margin-left: auto; margin-right: auto;" src="{% static 'img/cat_1.jpg' %}" alt="{{ forloop.counter0 }}">
+							    		{% else %}
+				    						<img style="width: 70%; margin-left: auto; margin-right: auto;" src="{{ item.poster }}" alt="{{ forloop.counter0 }}">
+				    					{% endif %}
+				    				</div>
+				    				
+
+				    				<div class="card" style="float:left; width:50%;">
+										<div class="card-body">
+											<h5>{{ item.title }}</h5>
+											<p>Genres: {{ item.genres }}</p>
+											<p>Year: {{ item.year }}</p>
+											<p>ImdbLink: <a href="{{ item.imdb_link }}">Click here to see the sinopse.</a> {{ item.imdb_id }}</p>
+											<p>YoutubeId: <a href="https://www.youtube.com/watch?v={{ item.youtubeId }}">Trailer on Youtube.</a></p>
+											<p>Tags: {{ item.tags }}</p>
+										</div>
+									</div>
+				    			</div>
+
 					    		<div class="carousel-caption d-none d-md-block">
-						    		<h5>{{ item.title }}</h5>
-									<p>Genres: {{ item.genres }}</p>
-									<p>Year: {{ item.year }}</p>
-									<p>ImdbId: {{ item.imdb_id }}</p>
-									<p>ImdbLink: {{ item.imdb_link }}</p>
-									<p>Poster: {{ item.poster }}</p>
-									<p>YoutubeId: {{ item.youtubeId }}</p>
-									<p>Tags: {{ item.tags }}</p>
-						  		</div>
+					    			<p>My form</p>
+					    		</div>
 					    	</div>
 				    	{% endif %}
 				    {% endfor %}

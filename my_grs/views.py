@@ -5,6 +5,8 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from my_grs.serializers import UserSerializer, MovieSerializer, RatingSerializer
 from django.contrib.auth.forms import UserCreationForm
+from django.http import JsonResponse
+from rest_framework.parsers import JSONParser
 
 
 # Create your views here.
@@ -52,12 +54,19 @@ def home(request):
                 })
 
         elif request.method == 'POST':
-            rating = JSONParser().parse(request)
-            print('$ $ $ $ $ {} $ $ $ $ $'.format(rating))
-            return render(request, 'home.html', {
-                'data': rating,
-                'counter': counter
-                })
+            user = User.objects.get(id=int(request.POST['this-user']))
+            movie = Movie.objects.get(movie_id=int(request.POST['this-movie']))
+
+            Rating.objects.create(
+                user_id=user,
+                movie_id=movie,
+                rating= float(request.POST['this-rating'])
+            )
+
+            print('$ $ $ $ $ {} $ $ $ $ $'.format(request.POST))
+            
+            return JsonResponse({'success': True})
+
 
     else:
         return render(request, 'home.html', {

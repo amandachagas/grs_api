@@ -18,6 +18,10 @@ class Movie(models.Model):
         ordering = ['created']
 
 
+    def __str__(self):
+        return str(self.movie_id)
+
+
 
 class Rating(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -26,3 +30,4 @@ class Rating(models.Model):
 
     class Meta:
         ordering = ['user_id']
+        unique_together = ('user_id', 'movie_id',)

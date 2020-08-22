@@ -114,7 +114,7 @@
 			</div> -->
 
 
-			<div class="col-12">
+			<div class="container col-12">
 
 			{% for item in data %}
 
@@ -140,13 +140,14 @@
 						</div>
 
 						<div class="col-12" style="text-align: center; min-height: 150px; top: 50%;">
-							<form>
+							<form method="post" class="eval-form">
+								{% csrf_token %}
 								<div class="my-rating">Your rating: </div>
-								<input type="hidden" class="input-hidden" id="my-input-rating" name="this-rating" value="0">
-								<input type="hidden" class="input-hidden" id="my-input-movieId" name="this-movie" value="{{ item.movie_id }}">
-								<input type="hidden" class="input-hidden" id="my-input-userId" name="this-user" value="{{ user.id }}">
+								<input type="hidden" class="input-hidden" name="this-rating" value="0">
+								<input type="hidden" class="input-hidden" name="this-movie" value="{{ item.movie_id }}">
+								<input type="hidden" class="input-hidden" name="this-user" value="{{ user.id }}">
 
-								<button type="submit" disabled="true" class="btn btn-primary col-8" id="eval-button">Evaluate</button>
+								<button type="submit" disabled="true" class="btn btn-primary col-8 submitButton" name="this-button">Evaluate</button>
 							</form>
 						</div>
 			    	</div>
@@ -156,21 +157,6 @@
 			{% endfor %}
 
 			</div>
-			
-			<!-- { for item in data %}
-			<ul>
-				<li>MovieId: {{ item.movie_id }}</li>
-				<li>Title: {{ item.title }}</li>
-				<li>Genres: {{ item.genres }}</li>
-				<li>Year: {{ item.year }}</li>
-				<li>ImdbId: {{ item.imdb_id }}</li>
-				<li>ImdbLink: {{ item.imdb_link }}</li>
-				<li>Poster: {{ item.poster }}</li>
-				<li>YoutubeId: {{ item.youtubeId }}</li>
-				<li>Tags: {{ item.tags }}</li>
-			</ul>
-			<br>
-			{ endfor %} -->
 			
 		{% endif %}
 	{% endif %}

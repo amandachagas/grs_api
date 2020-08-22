@@ -8,14 +8,48 @@ $(".my-rating").starRating({
   useGradient: false,
   minRating: 0.5,
   callback: function(currentRating, $el){
-    alert('Thank you! Your rate was ' + currentRating);
-    // $(this).parent().find('.input-hidden').val(currentRating)
-    $('#my-input-rating').val(currentRating);
-    $('#eval-button').attr('disabled', false);
-    // console.log($(this).parent().find('.input-hidden').val());
-    // console.log($(this).parent());
-    console.log($('#my-input-rating').val());
-    console.log('DOM element ', $el);
+    
+    $el.parent('form').children('input[name=this-rating]').val(currentRating);
+    $el.parent('form').children('button[name=this-button]').attr('disabled', false);
+
+    console.log($el.parent('form').children('input[name=this-rating]').val());
+    // console.log('DOM parent ', $el.parent('form')[0]);
+    console.log('DOM children ', $el.parent('form').children());
   }
 });
 
+
+$('.eval-form').submit(function(e){
+  var form = $(this);
+  var url = "/";
+  e.preventDefault();
+
+  $.ajax({
+    method: "post",
+    url: url,
+    data: form.serialize(),
+    dataType: 'json',
+
+    beforeSend: function(){
+        //$(".container_loader_ajax").css("display","block");
+    },
+    complete: function(){
+        //$(".container_loader_ajax").css("display","none");
+    },
+    success: function( data ) {     
+      alert('ok')
+      // $("#form-messages").html('<div class="submit-status-text"><span class="success"><i class="ion ion-ios-checkmark-outline"></i> ' + data.data[0].mensagem + '</span></div>').fadeIn(300).delay(3000).fadeOut(300);             
+    },
+    error: function(x, y){
+      // $("#form-messages").html('<div class="submit-status-text"><span class="error"><i class="ion ion-ios-close-outline"></i> ' + data.data[0].erro + ' ' + data.data[0].erro + '</span></div>').fadeIn(300).delay(3000).fadeOut(300);
+      console.log(x)
+      console.log(y)              
+    }
+  });
+
+});
+
+
+$(".submitButton").click(function(){
+	console.log($(this).parent("form"));
+});

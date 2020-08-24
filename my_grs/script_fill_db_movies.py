@@ -2,7 +2,7 @@ import my_grs.constants as constants
 import pandas as pd
 from my_grs.models import Movie
 
-items = pd.read_csv(constants.ITEMS_PATH, low_memory=False)
+items = pd.read_csv(constants.ITEMS_PATH, dtype={'imdbId': 'str'}, low_memory=False)
 for index, row in items.iterrows():
 	movie = Movie.objects.create(
 		movie_id=int(row.movieId), 
@@ -21,3 +21,12 @@ for index, row in items.iterrows():
 
 
 	# print('id: {}, title: {}'.format(row.movieId, row.title))
+
+
+# import my_grs.constants as constants
+# import pandas as pd
+# from my_grs.models import Movie
+
+# items = pd.read_csv(constants.ITEMS_PATH, dtype={'imdbId': 'str'},  low_memory=False)
+# for index, row in items.head().iterrows():
+# 	print('id: {}, title: {}, imdbId: {}'.format(row.movieId, row.title, str(row.imdbId)))

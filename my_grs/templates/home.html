@@ -134,9 +134,9 @@
 							<h5>{{ item.title }}</h5>
 							<p>Genres: {{ item.genres }}</p>
 							<p>Year: {{ item.year }}</p>
-							<p>ImdbLink: <a href="https://www.imdb.com/title/tt0{{ item.imdb_id }}">Click here to see the sinopse.</a></p>
+							<p>ImdbLink: <a href="https://www.imdb.com/title/tt{{ item.imdb_id }}">Click here to see the sinopse.</a></p>
 							<p>YoutubeId: <a href="https://www.youtube.com/watch?v={{ item.youtubeId }}">Trailer on Youtube.</a></p>
-							<p>Tags: {{ item.tags }}</p>
+							<p style="overflow: hidden; display: -webkit-box;-webkit-line-clamp: 2; -webkit-box-orient: vertical;">Tags: {{ item.tags }}</p>
 						</div>
 
 						<div class="col-12" style="text-align: center; min-height: 150px; top: 50%;">

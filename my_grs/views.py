@@ -44,17 +44,30 @@ def home(request):
 
     if request.user.is_authenticated:
 
+        user = User.objects.get(id=int(request.user.id))
+        # print(' > > > > > > > {} < < < < < < < <'.format(request.user.id))
+        # print(' > > > > > > > {} < < < < < < < <'.format(user))
+
         if request.method == 'GET':
-            movies = Movie.objects.all()[0:10]
-            serializer = MovieSerializer(movies, many=True)
-            # print(' > > > > > > > {} < < < < < < < <'.format(request.user.id))
+
+            try:
+
+                movies_rated = Rating.objects.filter(user_id=user).values('movie_id')
+                movies = Movie.objects.exclude(movie_id__in=movies_rated)
+
+            except Movie.DoesNotExist:
+                movies = None
+
+            # print(' # # #  {}  # # #'.format(movies[0:10]))
+
+            serializer = MovieSerializer(movies[0:10], many=True)
+            
             return render(request, 'home.html', {
                 'data': serializer.data,
                 'counter': counter
                 })
 
         elif request.method == 'POST':
-            user = User.objects.get(id=int(request.POST['this-user']))
             movie = Movie.objects.get(movie_id=int(request.POST['this-movie']))
 
             Rating.objects.create(
@@ -63,7 +76,7 @@ def home(request):
                 rating= float(request.POST['this-rating'])
             )
 
-            print('$ $ $ $ $ {} $ $ $ $ $'.format(request.POST))
+            # print('$ $ $ $ $ {} $ $ $ $ $'.format(request.POST))
             
             return JsonResponse({'success': True})
 

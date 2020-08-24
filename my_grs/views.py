@@ -60,7 +60,7 @@ def home(request):
 
             # print(' # # #  {}  # # #'.format(movies[0:10]))
 
-            serializer = MovieSerializer(movies[0:10], many=True)
+            serializer = MovieSerializer(movies[0:12], many=True)
             
             return render(request, 'home.html', {
                 'data': serializer.data,

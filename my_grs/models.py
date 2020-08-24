@@ -13,9 +13,10 @@ class Movie(models.Model):
     poster = models.CharField(max_length=500, blank=True, default='None')
     youtubeId = models.CharField(max_length=50, blank=True, default='None')
     tags = models.CharField(max_length=200, blank=True, default='None')
+    counter = models.PositiveIntegerField(blank=True, default=0)
 
     class Meta:
-        ordering = ['created']
+        ordering = ['-counter', 'movie_id']
 
 
     def __str__(self):

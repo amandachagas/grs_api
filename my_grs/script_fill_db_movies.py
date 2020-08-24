@@ -13,7 +13,8 @@ for index, row in items.iterrows():
 		imdb_link=row.imdbLink, 
 		poster=row.poster, 
 		youtubeId=row.youtubeId, 
-		tags=row.tags)
+		tags=row.tags,
+		counter=row.r_counter)
 	print(movie)
 
 

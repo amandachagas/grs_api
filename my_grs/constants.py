@@ -1,1 +1,1 @@
-ITEMS_PATH = './datasets/enhanced_movies_tags.csv'
+ITEMS_PATH = './datasets/enhanced_movies_tags_counter.csv'

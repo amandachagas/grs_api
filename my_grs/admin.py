@@ -11,6 +11,7 @@ class MovieAdmin(admin.ModelAdmin):
         'title',
         'genres',
         'tags',
+        'counter',
         'imdb_id',
         'imdb_link',
         'youtubeId',

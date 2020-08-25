@@ -26,7 +26,7 @@ SECRET_KEY = 'a&6qd76#(o-42@qt+d(p28emwgsx@wj0t4$d%vpzks95lw7c5m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['collectprefgrs.herokuapp.com']
 
 
 # Application definition
@@ -48,6 +48,7 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -133,6 +134,8 @@ STATICFILES_DIRS = [BASE_DIR / 'grs/static',]
 
 STATIC_ROOT = str(BASE_DIR / 'grs/site/static/')
 # STATIC_ROOT = str([os.path.join(ROOT_PATH, 'static')])
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 LOGIN_REDIRECT_URL = 'home'
 

@@ -36,7 +36,8 @@ $('.eval-form').submit(function(e){
     complete: function(){
         //$(".container_loader_ajax").css("display","none");
         // console.log(form.children());
-        form.children('button[name=this-button]').attr('disabled', true);
+        
+        // form.children('button[name=this-button]').attr('disabled', true);
     },
     success: function( data ) {
       form.parent().parent().css("background", "rgba(0, 255, 0, 0.2)");

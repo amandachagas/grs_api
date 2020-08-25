@@ -69,13 +69,19 @@ def home(request):
                 })
 
         elif request.method == 'POST':
+
             movie = Movie.objects.get(movie_id=int(request.POST['this-movie']))
 
-            Rating.objects.create(
-                user_id=user,
-                movie_id=movie,
-                rating= float(request.POST['this-rating'])
-            )
+            try:
+                rating = Rating.objects.get(user_id=user, movie_id=movie)
+                rating.rating = float(request.POST['this-rating'])
+                rating.save()
+            except:
+                Rating.objects.create(
+                    user_id=user,
+                    movie_id=movie,
+                    rating= float(request.POST['this-rating'])
+                )
 
             # print('$ $ $ $ $ {} $ $ $ $ $'.format(request.POST))
             

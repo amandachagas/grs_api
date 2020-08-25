@@ -14,7 +14,7 @@ $(".my-rating").starRating({
 
     console.log($el.parent('form').children('input[name=this-rating]').val());
     // console.log('DOM parent ', $el.parent('form')[0]);
-    console.log('DOM children ', $el.parent('form').children());
+    // console.log('DOM children ', $el.parent('form').children());
   }
 });
 
@@ -35,6 +35,8 @@ $('.eval-form').submit(function(e){
     },
     complete: function(){
         //$(".container_loader_ajax").css("display","none");
+        // console.log(form.children());
+        form.children('button[name=this-button]').attr('disabled', true);
     },
     success: function( data ) {
       form.parent().parent().css("background", "rgba(0, 255, 0, 0.2)");
@@ -48,9 +50,4 @@ $('.eval-form').submit(function(e){
     }
   });
 
-});
-
-
-$(".submitButton").click(function(){
-	console.log($(this).parent("form"));
 });

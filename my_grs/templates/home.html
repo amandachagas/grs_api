@@ -153,12 +153,13 @@
 						<div class="col-12" style="text-align: center; min-height: 150px; top: 50%;">
 							<form method="post" class="eval-form">
 								{% csrf_token %}
-								<div class="my-rating">Your rating: </div>
+								<div class="my-rating" name="this-star">Your rating: </div>
+								<span name="text-rating"></span>
 								<input type="hidden" class="input-hidden" name="this-rating" value="0">
 								<input type="hidden" class="input-hidden" name="this-movie" value="{{ item.movie_id }}">
 								<input type="hidden" class="input-hidden" name="this-user" value="{{ user.id }}">
 
-								<button type="submit" disabled="true" class="btn btn-primary col-8" name="this-button">Evaluate</button>
+								<!-- <button type="submit" disabled="true" class="btn btn-primary col-8" name="this-button">Evaluate</button> -->
 							</form>
 						</div>
 			    	</div>

@@ -7,15 +7,22 @@ $(".my-rating").starRating({
   activeColor: 'crimson',
   useGradient: false,
   minRating: 0.5,
+  disableAfterRate: false,
   callback: function(currentRating, $el){
     
     $el.parent('form').children('input[name=this-rating]').val(currentRating);
-    $el.parent('form').children('button[name=this-button]').attr('disabled', false);
+    $el.parent('form').children('span[name=text-rating]').text(currentRating);
+    // $el.parent('form').children('button[name=this-button]').attr('disabled', false);
 
     console.log($el.parent('form').children('input[name=this-rating]').val());
-    // console.log('DOM parent ', $el.parent('form')[0]);
-    // console.log('DOM children ', $el.parent('form').children());
-  }
+
+    $el.parent('form').submit();
+
+  },
+  // onHover: function(currentIndex, currentRating, $el){
+  //   $(".my-rating").starRating('setRating', 0);
+  //   $(".my-rating").starRating('setRating', currentRating);
+  // },
 });
 
 
@@ -36,7 +43,7 @@ $('.eval-form').submit(function(e){
     complete: function(){
         //$(".container_loader_ajax").css("display","none");
         // console.log(form.children());
-        
+
         // form.children('button[name=this-button]').attr('disabled', true);
     },
     success: function( data ) {

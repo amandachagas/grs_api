@@ -27,6 +27,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('signup/', views.signup, name='signup'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('to_csv/', views.to_csv, name='to_csv'),
     path('admin/', admin.site.urls),
     path('routes/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))

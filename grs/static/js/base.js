@@ -51,3 +51,28 @@ $('.eval-form').submit(function(e){
   });
 
 });
+
+
+$('.csv-form').submit(function(e){
+  var form = $(this);
+  var url = "to_csv/";
+  e.preventDefault();
+
+  $.ajax({
+    method: "post",
+    url: url,
+    data: form.serialize(),
+    dataType: 'json',
+    complete: function(){
+
+    },
+    success: function( data ) {
+      alert('ok');
+    },
+    error: function(x, y){
+      console.log(x)
+      console.log(y)              
+    }
+  });
+
+});

@@ -7,6 +7,7 @@ from my_grs.serializers import UserSerializer, MovieSerializer, RatingSerializer
 from django.contrib.auth.forms import UserCreationForm
 from django.http import JsonResponse
 from rest_framework.parsers import JSONParser
+import csv
 
 
 # Create your views here.
@@ -100,32 +101,25 @@ def signup(request):
         })
 
 
+def to_csv(request):
 
-# def login(request):
-#     username = request.POST['username']
-#     password = request.POST['password']
-#     user = authenticate(request, username=username, password=password)
-#     if user is not None:
-#         login(request, user)
-#         # Redirect to a success page.
-#     else:
-#         # Return an 'invalid login' error message.
+    if request.method == 'POST':
+        ratings = Rating.objects.all()
 
+        f = open('./datasets/output.csv', 'w')
+        writer = csv.writer(f)
+        writer.writerow([
+            "userId",
+            "movieId",
+            "rating"
+        ])
 
-# @csrf_exempt
-# def users_list(request):
-#     """
-#     List all users, or create a new one.
-#     """
-#     if request.method == 'GET':
-#         snippets = Snippet.objects.all()
-#         serializer = SnippetSerializer(snippets, many=True)
-#         return JsonResponse(serializer.data, safe=False)
+        for obj in ratings:
+            # print('> | | | | | | > > {}'.format(obj));
+            writer.writerow([
+                obj.user_id.id,
+                obj.movie_id.movie_id,
+                obj.rating
+            ])
 
-#     elif request.method == 'POST':
-#         data = JSONParser().parse(request)
-#         serializer = SnippetSerializer(data=data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return JsonResponse(serializer.data, status=201)
-#         return JsonResponse(serializer.errors, status=400)
+    return JsonResponse({'success': True})

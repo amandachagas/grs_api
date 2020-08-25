@@ -113,6 +113,14 @@
 				</div>
 			</div> -->
 
+			{% if user.is_superuser %}
+			<div class="col-12" style="min-height: 100px;">
+				<form method="post" class="csv-form" style="text-align: center;">
+					{% csrf_token %}
+					<button type="submit" class="btn btn-danger col-8">Export to csv</button>
+				</form>
+			</div>
+			{% endif %}
 
 			<div class="container col-12">
 

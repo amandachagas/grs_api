@@ -90,9 +90,7 @@ def home(request):
 
 
     else:
-        return render(request, 'home.html', {
-        'counter': counter
-        })
+        return render(request, 'home.html')
 
 
 def signup(request):

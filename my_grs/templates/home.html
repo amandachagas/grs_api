@@ -3,7 +3,10 @@
 
 {% block content %}
 	<h2>Homepage</h2>
-	<p>Welcome to My GRS, {% if user.is_authenticated %}{{ user.username }}{% else %}visitor{% endif %}!</p>
+	<span></span>
+	<p>Welcome, {% if user.is_authenticated %}{{ user.username }}{% else %}visitor{% endif %}!</p>
+
+	<span style="font-weight: bold;">This system was developed to collect users preferences on movies. Once your preference is collected, you may particape in a experiment of my M.Sc. Computer reasearch: A Group Recommender Model Using Diversification Techniques.</span>
 	
 	{% if user.is_superuser %}
 	<p>Total users registred: {{ counter }}</p>

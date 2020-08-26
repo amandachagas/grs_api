@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url 
+import django_heroku
+# import dj_database_url 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -22,7 +23,8 @@ ROOT_PATH = os.path.dirname(__file__)
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'a&6qd76#(o-42@qt+d(p28emwgsx@wj0t4$d%vpzks95lw7c5m'
+# SECRET_KEY = 'a&6qd76#(o-42@qt+d(p28emwgsx@wj0t4$d%vpzks95lw7c5m'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'a&6qd76#(o-42@qt+d(p28emwgsx@wj0t4$d%vpzks95lw7c5m')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -150,6 +152,6 @@ LOGIN_REDIRECT_URL = 'home'
 
 LOGOUT_REDIRECT_URL = 'home'
 
-# prod_db = dj_database_url.config(conn_max_age=600)
 
-# DATABASES['default'].update(prod_db)
+# Activate Django-Heroku.
+django_heroku.settings(locals())

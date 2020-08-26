@@ -41,9 +41,10 @@ class RatingViewSet(viewsets.ModelViewSet):
 
 
 def home(request):
-    counter = User.objects.count()
 
     if request.user.is_authenticated:
+
+        counter = User.objects.count()
 
         user = User.objects.get(id=int(request.user.id))
         # print(' > > > > > > > {} < < < < < < < <'.format(request.user.id))

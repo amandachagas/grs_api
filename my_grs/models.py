@@ -5,14 +5,14 @@ from django.contrib.auth.models import User
 class Movie(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     movie_id = models.PositiveIntegerField(unique=True, primary_key=True)
-    title = models.CharField(max_length=100) 
-    genres = models.CharField(max_length=150)
+    title = models.CharField(max_length=300) 
+    genres = models.CharField(max_length=300)
     year = models.CharField(max_length=100)
     imdb_id = models.CharField(max_length=50, blank=True, default='None')
     imdb_link = models.CharField(max_length=200, blank=True, default='None')
     poster = models.CharField(max_length=500, blank=True, default='None')
     youtubeId = models.CharField(max_length=50, blank=True, default='None')
-    tags = models.CharField(max_length=1000, blank=True, default='None')
+    tags = models.TextField(max_length=2000, blank=True, default='None')
     counter = models.PositiveIntegerField(blank=True, default=0)
 
     class Meta:

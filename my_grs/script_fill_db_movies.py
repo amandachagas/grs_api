@@ -3,7 +3,11 @@ import pandas as pd
 from my_grs.models import Movie
 
 items = pd.read_csv(constants.ITEMS_PATH, dtype={'imdbId': 'str'}, low_memory=False)
+counter = 0
 for index, row in items.iterrows():
+	counter += 1
+	if counter == 1001:
+		break
 	movie = Movie.objects.create(
 		movie_id=int(row.movieId), 
 		title=row.title, 

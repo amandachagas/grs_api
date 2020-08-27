@@ -55,6 +55,56 @@ def home(request):
 
             try:
 
+                ratings = Rating.objects.filter(user_id=user).values('movie_id')
+                movies_rated = Movie.objects.filter(movie_id__in=ratings)
+
+                # print('>< >< >< >< {}'.format(movies_rated))
+
+                my_dict = []
+                for movie in movies_rated:
+                    aux = dict()
+
+                    rating = Rating.objects.get(user_id=user, movie_id=movie)
+
+                    # for rating in ratings:
+                    #     if movie.movie_id == rating.movie_id.id:
+                    aux['title'] = movie.title
+                    aux['movie_id'] = movie.movie_id
+                    aux['genres'] = movie.genres
+                    aux['year'] = movie.year
+                    aux['imdb_id'] = movie.imdb_id
+                    aux['youtubeId'] = movie.youtubeId
+                    aux['poster'] = movie.poster
+                    aux['rating'] = float(rating.rating)
+                    my_dict.append(aux)
+
+                # print('$ $ $ $ $ $ $ $ {}'.format(my_dict))
+
+            except Movie.DoesNotExist:
+                my_dict = None
+
+            # print(' # # #  {}  # # #'.format(movies_pag[0:10]))
+            
+            return render(request, 'home.html', {
+                'data': my_dict,
+                'counter': counter
+                })
+    else:
+        return render(request, 'home.html')
+
+
+def evaluate(request):
+
+    if request.user.is_authenticated:
+
+        user = User.objects.get(id=int(request.user.id))
+        # print(' > > > > > > > {} < < < < < < < <'.format(request.user.id))
+        # print(' > > > > > > > {} < < < < < < < <'.format(user))
+
+        if request.method == 'GET':
+
+            try:
+
                 movies_rated = Rating.objects.filter(user_id=user).values('movie_id')
                 movies = Movie.objects.exclude(movie_id__in=movies_rated)
 
@@ -71,16 +121,15 @@ def home(request):
                 except EmptyPage:
                     movies_pag = paginator.page(paginator.num_pages)
 
-                print('> > > > > > > > {}'.format(movies_pag))
+                # print('> > > > > > > > {}'.format(movies_pag))
 
             except Movie.DoesNotExist:
                 movies_pag = None
 
             # print(' # # #  {}  # # #'.format(movies_pag[0:10]))
             
-            return render(request, 'home.html', {
-                'data': movies_pag,
-                'counter': counter
+            return render(request, 'evaluate.html', {
+                'data': movies_pag
                 })
 
         elif request.method == 'POST':
@@ -104,7 +153,7 @@ def home(request):
 
 
     else:
-        return render(request, 'home.html')
+        return render(request, 'evaluate.html')
 
 
 def signup(request):

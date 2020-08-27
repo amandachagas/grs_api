@@ -25,10 +25,18 @@ $(".my-rating").starRating({
   // },
 });
 
+$(".my-rating-read-only").starRating({
+  totalStars: 5,
+  starShape: 'rounded',
+  starSize: 35,
+  emptyColor: 'lightgray',
+  readOnly: true
+});
+
 
 $('.eval-form').submit(function(e){
   var form = $(this);
-  var url = "/";
+  var url = "";
   e.preventDefault();
 
   $.ajax({

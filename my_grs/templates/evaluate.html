@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+	<h2>Evaluate movies</h2>
+	<span style="font-weight: bold;">This system was developed to collect users preferences on movies. Once your preference is collected, you may particape in a experiment of my M.Sc. Computer reasearch: A Group Recommender Model Using Diversification Techniques.</span>
+
+	{% if user.is_authenticated %}
+
+		{% if data %}
+
+			<div class="container col-12">
+
+    			{% for item in data %}
+
+    			    {% if forloop.first %}<div class="row">{% endif %}
+    			    <div class="col-4" style="width: 100%; overflow: hidden;">
+    			    	
+    			    	<div style="width:50%; float:left;">
+    			    		{% if item.poster == 'None' %}
+    							<img class="d-block w-100" style="margin-left: auto; margin-right: auto;" src="{% static 'img/cat_1.jpg' %}">
+    			    		{% else %}
+        						<img style="width: 100%; margin-left: auto; margin-right: auto;" src="{{ item.poster }}">
+        					{% endif %}
+    			    	</div>
+
+    			    	<div class="card" style="float:left; width:50%;">
+    			    		<div class="card-body">
+    							<h5>{{ item.title }}</h5>
+    							<p>Genres: {{ item.genres }}</p>
+    							<p>Year: {{ item.year }}</p>
+    							<p>ImdbLink: <a href="https://www.imdb.com/title/tt{{ item.imdb_id }}" target="_blank">Click here to see the sinopse</a></p>
+    							<p>YoutubeId: <a href="https://www.youtube.com/watch?v={{ item.youtubeId }}" target="_blank">Trailer on Youtube</a></p>
+    							<p style="overflow: hidden; display: -webkit-box;-webkit-line-clamp: 2; -webkit-box-orient: vertical;">Tags: {{ item.tags }}</p>
+    						</div>
+
+    						<div class="col-12" style="text-align: center; min-height: 150px; top: 50%;">
+    							<form method="post" class="eval-form">
+    								{% csrf_token %}
+    								<div class="my-rating" name="this-star">Your rating: </div>
+    								<span name="text-rating"></span>
+    								<input type="hidden" class="input-hidden" name="this-rating" value="0">
+    								<input type="hidden" class="input-hidden" name="this-movie" value="{{ item.movie_id }}">
+    								<input type="hidden" class="input-hidden" name="this-user" value="{{ user.id }}">
+
+    								<!-- <button type="submit" disabled="true" class="btn btn-primary col-8" name="this-button">Evaluate</button> -->
+    							</form>
+    						</div>
+    			    	</div>
+    		        </div>
+    			    {% if forloop.counter|divisibleby:3 %}</div><br><div class="row">{% endif %}
+    			    {% if forloop.last %}</div>{% endif %}
+    			{% endfor %}
+
+                <div class="col-12">
+                    
+                    {% if data.has_other_pages %}
+                        <ul class="pagination pagination-lg justify-content-center">
+                            {% if data.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page={{ data.previous_page_number }}">&laquo;</a></li>
+                            {% else %}
+                                <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
+                            {% endif %}
+                            {% for i in data.paginator.page_range %}
+                                {% if data.number == i %}
+                                    <li class="active page-item"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+                                {% else %}
+                                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if data.has_next %}
+                                <li class="page-item"><a class="page-link" href="?page={{ data.next_page_number }}">&raquo;</a></li>
+                            {% else %}
+                                <li class="disabled page-item"><span>&raquo;</span></li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+
+                </div>
+
+			</div>
+			
+		{% endif %}
+
+	{% endif %}
+
+{% endblock %}

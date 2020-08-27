@@ -69,26 +69,22 @@ $('.eval-form').submit(function(e){
 });
 
 
-$('.csv-form').submit(function(e){
-  var form = $(this);
-  var url = "to_csv/";
-  e.preventDefault();
-
-  $.ajax({
-    method: "post",
-    url: url,
-    data: form.serialize(),
-    dataType: 'json',
-    complete: function(){
-
-    },
-    success: function( data ) {
-      alert('ok');
-    },
-    error: function(x, y){
-      console.log(x)
-      console.log(y)              
-    }
-  });
-
+$('.csv-form').on('click', function () {
+    $.ajax({
+        url: 'to_csv/',
+        method: 'POST',
+        xhrFields: {
+            responseType: 'blob'
+        },
+        success: function (data) {
+            var a = document.createElement('a');
+            var url = window.URL.createObjectURL(data);
+            a.href = url;
+            a.download = 'output.csv';
+            document.body.append(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+        }
+    });
 });

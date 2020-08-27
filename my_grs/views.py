@@ -5,9 +5,9 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from my_grs.serializers import UserSerializer, MovieSerializer, RatingSerializer
 from django.contrib.auth.forms import UserCreationForm
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from rest_framework.parsers import JSONParser
-import csv
+import csv, json
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
@@ -184,8 +184,13 @@ def to_csv(request):
     if request.method == 'POST':
         ratings = Rating.objects.all()
 
-        f = open('./datasets/output.csv', 'w')
-        writer = csv.writer(f)
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="output.csv"'
+
+        writer = csv.writer(response)
+
+        # f = open('./datasets/output.csv', 'w')
+        # writer = csv.writer(f)
         writer.writerow([
             "userId",
             "movieId",
@@ -200,4 +205,7 @@ def to_csv(request):
                 obj.rating
             ])
 
-    return JsonResponse({'success': True})
+        return response
+
+    else:
+        return render(request, 'to_csv.html')

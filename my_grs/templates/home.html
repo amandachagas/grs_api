@@ -18,15 +18,10 @@
 	{% if user.is_authenticated %}
 		
         {% if user.is_superuser %}
-            <div class="col-12 center" style="min-height: 100px;">
-                <form method="post" class="csv-form col-8" style="text-align: center;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-danger col-12">Export to csv</button>
-                </form>
+            <div class="col-12 center">
+                <a class="col-8" href="{% url 'to_csv' %}"><button type="submit" class="btn btn-warning col-12">Export to csv</button></a>
             </div>
         {% endif %}
-
-        <br>
 
         <div class="col-12 center">
             <a class="col-8" href="{% url 'evaluate' %}"><button type="submit" class="btn btn-danger col-12">Evaluate Movies</button></a>

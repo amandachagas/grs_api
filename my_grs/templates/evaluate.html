@@ -21,7 +21,7 @@
     			    		{% if item.poster == 'None' %}
     							<img class="d-block w-100" style="margin-left: auto; margin-right: auto;" src="{% static 'img/cat_1.jpg' %}">
     			    		{% else %}
-        						<img style="width: 100%; margin-left: auto; margin-right: auto;" src="{{ item.poster }}">
+        						<a href="https://www.imdb.com/title/tt{{ item.imdb_id }}" target="_blank"><img style="width: 100%; margin-left: auto; margin-right: auto;" src="{{ item.poster }}"></a>
         					{% endif %}
     			    	</div>
 

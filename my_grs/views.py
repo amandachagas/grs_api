@@ -58,6 +58,8 @@ def home(request):
                 ratings = Rating.objects.filter(user_id=user).values('movie_id')
                 movies_rated = Movie.objects.filter(movie_id__in=ratings)
 
+                rated_counter = movies_rated.count()
+
                 # print('>< >< >< >< {}'.format(movies_rated))
 
                 my_dict = []
@@ -97,7 +99,8 @@ def home(request):
             
             return render(request, 'home.html', {
                 'data': my_dict_pag,
-                'counter': counter
+                'counter': counter,
+                'rated_counter': 20-rated_counter
                 })
     else:
         return render(request, 'home.html')

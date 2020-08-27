@@ -6,7 +6,7 @@
 	<span></span>
 	<p>Welcome, {% if user.is_authenticated %}{{ user.username }}{% else %}visitor{% endif %}!</p>
 
-	<span style="font-weight: bold;">This system was developed to collect users preferences on movies. Once your preference is collected, you may particape in a experiment of my M.Sc. Computer reasearch: A Group Recommender Model Using Diversification Techniques.</span>
+	<span class="bold">This system was developed to collect users preferences on movies. Once your preference is collected, you may particape in a experiment of my M.Sc. Computer reasearch: A Group Recommender Model Using Diversification Techniques.</span>
 	
 	{% if user.is_superuser %}
 	<p>Total users registred: {{ counter }}</p>
@@ -16,6 +16,16 @@
 
 	<br>
 	{% if user.is_authenticated %}
+
+        {% if rated_counter > 0 %}
+            <div class="center col-12">
+                <h4>You still need to evalute <span class="bold">{{rated_counter}}</span> movies to be settled for the experiment!</h4>
+            </div>
+        {% else %}
+            <div class="center col-12">
+                <h4>You are settled for the experiment!</h4>
+            </div>
+        {% endif %}
 		
         {% if user.is_superuser %}
             <div class="col-12 center">
@@ -40,7 +50,7 @@
                             {% if item.poster == 'None' %}
                                 <img class="d-block w-100" style="margin-left: auto; margin-right: auto;" src="{% static 'img/cat_1.jpg' %}">
                             {% else %}
-                                <img style="width: 100%; margin-left: auto; margin-right: auto;" src="{{ item.poster }}">
+                                <a href="https://www.imdb.com/title/tt{{ item.imdb_id }}" target="_blank"><img style="width: 100%; margin-left: auto; margin-right: auto;" src="{{ item.poster }}"></a>
                             {% endif %}
                         </div>
 

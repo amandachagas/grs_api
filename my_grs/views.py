@@ -8,6 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.http import JsonResponse
 from rest_framework.parsers import JSONParser
 import csv
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 # Create your views here.
@@ -57,15 +58,28 @@ def home(request):
                 movies_rated = Rating.objects.filter(user_id=user).values('movie_id')
                 movies = Movie.objects.exclude(movie_id__in=movies_rated)
 
+                movies = movies[0:100]
+
+                page = request.GET.get('page', 1)
+
+                paginator = Paginator(movies, 30)
+                
+                try:
+                    movies_pag = paginator.page(page)
+                except PageNotAnInteger:
+                    movies_pag = paginator.page(1)
+                except EmptyPage:
+                    movies_pag = paginator.page(paginator.num_pages)
+
+                print('> > > > > > > > {}'.format(movies_pag))
+
             except Movie.DoesNotExist:
-                movies = None
+                movies_pag = None
 
-            # print(' # # #  {}  # # #'.format(movies[0:10]))
-
-            serializer = MovieSerializer(movies[0:15], many=True)
+            # print(' # # #  {}  # # #'.format(movies_pag[0:10]))
             
             return render(request, 'home.html', {
-                'data': serializer.data,
+                'data': movies_pag,
                 'counter': counter
                 })
 

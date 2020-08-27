@@ -79,14 +79,24 @@ def home(request):
                     my_dict.append(aux)
 
                 # print('$ $ $ $ $ $ $ $ {}'.format(my_dict))
+                page = request.GET.get('page', 1)
+
+                paginator = Paginator(my_dict, 30)
+                
+                try:
+                    my_dict_pag = paginator.page(page)
+                except PageNotAnInteger:
+                    my_dict_pag = paginator.page(1)
+                except EmptyPage:
+                    my_dict_pag = paginator.page(paginator.num_pages)
 
             except Movie.DoesNotExist:
-                my_dict = None
+                my_dict_pag = None
 
             # print(' # # #  {}  # # #'.format(movies_pag[0:10]))
             
             return render(request, 'home.html', {
-                'data': my_dict,
+                'data': my_dict_pag,
                 'counter': counter
                 })
     else:

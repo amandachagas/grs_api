@@ -121,7 +121,7 @@ def evaluate(request):
                 movies_rated = Rating.objects.filter(user_id=user).values('movie_id')
                 movies = Movie.objects.exclude(movie_id__in=movies_rated)
 
-                movies = movies[0:100]
+                movies = movies[0:150]
 
                 page = request.GET.get('page', 1)
 

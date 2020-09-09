@@ -190,6 +190,9 @@
           if (index <= endIndex) {
             $polygonRight.attr('style', 'fill:'+ratedColor);
           }
+        } else {
+            $polygonLeft.attr('style', 'stroke-opacity: 0');
+            $polygonRight.attr('style', 'stroke-opacity: 0');
         }
       }.bind(this));
     },

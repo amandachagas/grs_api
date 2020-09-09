@@ -4,7 +4,9 @@
 {% block content %}
 
 	<h2>Evaluate movies</h2>
-	<span style="font-weight: bold;">This system was developed to collect users preferences on movies. Once your preference is collected, you may particape in a experiment of my M.Sc. Computer reasearch: A Group Recommender Model Using Diversification Techniques.</span>
+	<span class="bold">This system was developed to collect users preferences on movies. Once your preference is collected, you may particape in a experiment of my M.Sc. Computer reasearch: A Group Recommender Model Using Diversification Techniques.</span>
+    
+    <br><br>
 
 	{% if user.is_authenticated %}
 
@@ -15,7 +17,7 @@
     			{% for item in data %}
 
     			    {% if forloop.first %}<div class="row">{% endif %}
-    			    <div class="col-4" style="width: 100%; overflow: hidden;">
+    			    <div class="col-12 col-xl-4" style="width: 100%; overflow: hidden;">
     			    	
     			    	<div style="width:50%; float:left;">
     			    		{% if item.poster == 'None' %}

@@ -16,14 +16,14 @@
 
 	<h3>Group Recommender System - Collecting users preferences</h3>
 	
-	<a href="{% url 'home' %}">Home</a> / 
+	<a href="{% url 'home' %}" class="title">Home</a> <span class="title padding">•</span> 
 	{% if user.is_authenticated %}
-		<a href="{% url 'password_change' %}">Change password</a> / 
-		<a href="{% url 'logout' %}">Logout</a> / 
-		<strong>{{ user.username }}</strong>
+		<a href="{% url 'password_change' %}" class="title">Change password</a> <span class="title padding">•</span> 
+		<a href="{% url 'logout' %}" class="title">Logout</a> <span class="title padding">•</span> 
+		<strong class="title">{{ user.username }}</strong>
 	{% else %}
-		<a href="{% url 'signup' %}">Sign Up</a> /
-		<a href="{% url 'login' %}">Login</a>
+		<a href="{% url 'signup' %}" class="title">Sign Up</a> <span class="title padding">•</span> 
+		<a href="{% url 'login' %}" class="title">Login</a>
 	{% endif %}	
 	<hr>
     

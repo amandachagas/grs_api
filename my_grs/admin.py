@@ -1,5 +1,6 @@
 from django.contrib import admin
 from my_grs.models import Movie, Rating
+from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
 
@@ -29,5 +30,6 @@ class RatingAdmin(admin.ModelAdmin):
     )
 
 
+UserAdmin.list_display = ('username', 'id', 'is_staff')
 admin.site.register(Movie, MovieAdmin)
 admin.site.register(Rating, RatingAdmin)
